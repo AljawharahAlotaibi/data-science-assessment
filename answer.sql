@@ -1,7 +1,7 @@
 SELECT 
     it.investor_id,
     s.sector_name,
-    ROUND((it.no_of_shares * 100.0 / ts.total_shares), 2) AS share_percentage
+    CAST((it.no_of_shares * 100.0 / ts.total_shares) AS FLOAT) AS share_percentage
 FROM investor_transactions it
 JOIN sectors s 
     ON it.sector_id = s.sector_id
@@ -13,4 +13,4 @@ JOIN (
     ON it.investor_id = ts.investor_id
 ORDER BY 
     it.investor_id,
-    share_percentage;
+    share_percentage DESC;
